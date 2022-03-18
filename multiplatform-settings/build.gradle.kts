@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 /*
  * Copyright 2019 Russell Wolf
  *
@@ -25,6 +27,9 @@ plugins {
 standardConfiguration()
 
 kotlin {
+    targets.getByName<KotlinNativeTarget>("linuxX64") {
+        compilations["main"].cinterops.create("dconf")
+    }
     sourceSets {
         commonMain {
             dependencies {

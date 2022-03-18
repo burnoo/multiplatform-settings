@@ -37,7 +37,10 @@ abstract class BaseSettingsTest(
     protected lateinit var settings: Settings
 
     private val settingsFactory: Settings.Factory = object : Settings.Factory {
-        override fun create(name: String?): Settings = platformFactory.create(name).also { it.clear() }
+        override fun create(name: String?): Settings {
+            return platformFactory.create(name)
+                .also { it.clear() }
+        }
     }
 
     @BeforeTest
