@@ -29,8 +29,11 @@ dependencies {
     testImplementation(compose.desktop.uiTestJUnit4)
 }
 
+//compose {
+//    kotlinCompilerPlugin.set("1.5.4-dev1-kt2.0.0-Beta1")
+//}
 compose {
-    kotlinCompilerPlugin.set("1.5.3")
+    kotlinCompilerPlugin.set("androidx.compose.compiler:compiler:1.5.8-dev-k2.0.0-Beta2-99ed868a0f8")
 }
 
 compose.desktop {
