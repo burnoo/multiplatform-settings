@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 /*
  * Copyright 2019 Russell Wolf
  *
@@ -30,42 +28,20 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":multiplatform-settings"))
-
-                implementation(libs.kotlinx.coroutines.core)
             }
         }
         commonTest {
             dependencies {
-                implementation(project(":tests"))
                 implementation(project(":multiplatform-settings-test"))
+                implementation(project(":tests"))
 
                 implementation(libs.kotlin.test)
-
-                implementation(libs.kotlinx.coroutines.test)
-                implementation(libs.turbine)
-            }
-        }
-
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(libs.androidx.test.core)
-                implementation(libs.androidx.test.junit)
-                implementation(libs.robolectric)
             }
         }
     }
 }
 
 android {
-    namespace = "com.russhwolf.settings.coroutines"
-    testOptions.unitTests.isIncludeAndroidResources = true
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
+    namespace = "com.russhwolf.settings.runtime_observable"
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-    kotlinOptions.freeCompilerArgs += "-Xjvm-default=all"
-}

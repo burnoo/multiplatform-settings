@@ -15,14 +15,13 @@
  */
 
 plugins {
-    id("com.android.library")
-    kotlin("multiplatform")
-    id("org.jetbrains.dokka")
-    `maven-publish`
-    signing
+    id("standard-configuration")
+    id("module-publication")
 }
 
-standardConfiguration()
+standardConfig {
+    defaultTargets()
+}
 
 kotlin {
     sourceSets {
@@ -34,40 +33,15 @@ kotlin {
             dependencies {
                 implementation(project(":tests"))
 
-                implementation(kotlin("test"))
+                implementation(libs.kotlin.test)
             }
         }
 
-        val androidMain by getting {
-            dependencies {
-            }
-        }
         val androidUnitTest by getting {
             dependencies {
-                implementation("junit:junit:${Versions.junit}")
-                implementation("androidx.test:core:${Versions.androidxTest}")
-                implementation("androidx.test.ext:junit:${Versions.androidxTestExt}")
-                implementation("org.robolectric:robolectric:${Versions.robolectric}")
-            }
-        }
-
-        val jvmMain by getting {
-            dependencies {
-            }
-        }
-        val jvmTest by getting {
-            dependencies {
-                implementation("junit:junit:${Versions.junit}")
-            }
-        }
-
-        val jsMain by getting {
-            dependencies {
-            }
-        }
-        val jsTest by getting {
-            dependencies {
-                implementation(kotlin("test-js"))
+                implementation(libs.androidx.test.core)
+                implementation(libs.androidx.test.junit)
+                implementation(libs.robolectric)
             }
         }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Russell Wolf
+ * Copyright 2024 Russell Wolf
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 pluginManagement {
-    includeBuild("convention-plugins")
     repositories {
         google()
-        gradlePluginPortal()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
@@ -26,19 +26,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
+    }
+
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
     }
 }
-
-rootProject.name = "MultiplatformSettings"
-
-include(
-    ":multiplatform-settings",
-    ":multiplatform-settings:keychain-tests",
-    ":multiplatform-settings-test",
-    ":multiplatform-settings-no-arg",
-    ":multiplatform-settings-coroutines",
-    ":multiplatform-settings-datastore",
-    ":multiplatform-settings-serialization",
-    ":multiplatform-settings-make-observable",
-    ":tests"
-)

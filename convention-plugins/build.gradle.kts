@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Russell Wolf
+ * Copyright 2024 Russell Wolf
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,31 +15,15 @@
  */
 
 plugins {
-    id("standard-configuration")
-    id("module-publication")
+    `kotlin-dsl`
 }
 
-standardConfig {
-    defaultTargets()
-}
+dependencies {
+    implementation(libs.kotlin.gradle)
+    implementation(libs.kotlin.compiler.embeddable)
+    implementation(libs.android.gradle)
 
-kotlin {
-    sourceSets {
-        commonMain {
-            dependencies {
-                implementation(project(":multiplatform-settings"))
-            }
-        }
-        commonTest {
-            dependencies {
-                implementation(project(":tests"))
-
-                implementation(libs.kotlin.test)
-            }
-        }
-    }
-}
-
-android {
-    namespace = "com.russhwolf.settings.test"
+    // h4x so we can access version catalog from convention script
+    // https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
+    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
