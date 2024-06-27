@@ -42,3 +42,21 @@ rootProject.extensions.findByType<NodeJsRootExtension>()?.apply {
 tasks.withType<KotlinNpmInstallTask>().configureEach {
     args.add("--ignore-engines")
 }
+
+// Adds burnoo's maven to all subprojects
+subprojects {
+    afterEvaluate {
+        this.extensions.findByType<PublishingExtension>()?.apply {
+            repositories {
+                maven {
+                    name = "burnoo"
+                    url = uri("https://pkgs.dev.azure.com/burnoo/maven/_packaging/public/maven/v1")
+                    credentials {
+                        username = rootProject.findProperty("azureUsername")?.toString()
+                        password = rootProject.findProperty("azureKey")?.toString()
+                    }
+                }
+            }
+        }
+    }
+}
