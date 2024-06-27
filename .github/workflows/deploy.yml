@@ -53,19 +53,3 @@ jobs:
           publishTvosSimulatorArm64PublicationToBurnooRepository \
           publishTvosX64PublicationToBurnooRepository \
           --no-daemon --stacktrace
-
-  deploy-windows:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: JDK setup
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: corretto
-
-      - name: Windows deploy
-        run: |
-          ./gradlew publishMingwX64PublicationToBurnooRepository --no-daemon --stacktrace
