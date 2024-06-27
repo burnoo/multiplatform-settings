@@ -25,7 +25,7 @@ plugins {
 }
 
 allprojects {
-    ext["library_version"] = "1.2.0"
+    ext["library_version"] = "1.2.0-beap1"
 
     repositories {
         mavenLocal()

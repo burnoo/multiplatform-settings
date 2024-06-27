@@ -1,5 +1,8 @@
 # Changelog #
 
+## v1.2.0-beap1 *(2023-06-27)* ##
+- Changes to publish 1.2.0 on burnoo's Maven
+
 ## v1.2.0 *(2023-04-XX)* ##
 
 - Update to Kotlin 1.9.23, Gradle 8.7, and Android Gradle Plugin 8.3.2
