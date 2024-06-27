@@ -4,10 +4,8 @@ on:
   workflow_dispatch:
 
 env:
-  ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
-  ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
-  ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_KEY }}
-  ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
+  ORG_GRADLE_PROJECT_azureUsername: ${{ vars.AZURE_USERNAME }}
+  ORG_GRADLE_PROJECT_azureKey: ${{ secrets.AZURE_KEY }}
 
 jobs:
   deploy-linux:
@@ -24,7 +22,7 @@ jobs:
 
       - name: Linux deploy
         run: |
-          ./gradlew publish --no-daemon --stacktrace
+          ./gradlew publishAllPublicationsToBurnooRepository --no-daemon --stacktrace
 
   deploy-macos:
     runs-on: macos-latest
@@ -41,33 +39,17 @@ jobs:
       - name: Mac deploy
         run: |
           ./gradlew \
-          publishIosArm64PublicationToMavenRepository \
-          publishIosSimulatorArm64PublicationToMavenRepository \
-          publishIosX64PublicationToMavenRepository \
-          publishMacosX64PublicationToMavenRepository \
-          publishMacosArm64PublicationToMavenRepository \
-          publishWatchosArm32PublicationToMavenRepository \
-          publishWatchosArm64PublicationToMavenRepository \
-          publishWatchosDeviceArm64PublicationToMavenRepository \
-          publishWatchosSimulatorArm64PublicationToMavenRepository \
-          publishWatchosX64PublicationToMavenRepository \
-          publishTvosArm64PublicationToMavenRepository \
-          publishTvosSimulatorArm64PublicationToMavenRepository \
-          publishTvosX64PublicationToMavenRepository \
+          publishIosArm64PublicationToBurnooRepository \
+          publishIosSimulatorArm64PublicationToBurnooRepository \
+          publishIosX64PublicationToBurnooRepository \
+          publishMacosX64PublicationToBurnooRepository \
+          publishMacosArm64PublicationToBurnooRepository \
+          publishWatchosArm32PublicationToBurnooRepository \
+          publishWatchosArm64PublicationToBurnooRepository \
+          publishWatchosDeviceArm64PublicationToBurnooRepository \
+          publishWatchosSimulatorArm64PublicationToBurnooRepository \
+          publishWatchosX64PublicationToBurnooRepository \
+          publishTvosArm64PublicationToBurnooRepository \
+          publishTvosSimulatorArm64PublicationToBurnooRepository \
+          publishTvosX64PublicationToBurnooRepository \
           --no-daemon --stacktrace
-
-  deploy-windows:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: JDK setup
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: corretto
-
-      - name: Windows deploy
-        run: |
-          ./gradlew publishMingwX64PublicationToMavenRepository --no-daemon --stacktrace

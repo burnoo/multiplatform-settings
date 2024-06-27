@@ -1,5 +1,5 @@
 [versions]
-multiplatformSettings = "1.2.0"
+multiplatformSettings = "1.2.0-beap1"
 
 kotlin = "1.9.24"
 
